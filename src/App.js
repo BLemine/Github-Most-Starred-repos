@@ -22,7 +22,8 @@ export default function App() {
   return (
     <div style={{ textAlign: "center" }}>
       {repos.items.map(rep => {
-        return <Starred key={rep.id} repoName={rep.full_name} description={rep.description} stars={rep.stargazers_count} issues={rep.open_issues} />
+        console.log(rep.owner?rep.owner.avatar_url:"hjh")
+        return <Starred key={rep.id} repoName={rep.full_name} avatar={rep.owner?rep.owner.avatar_url:"hjh"} description={rep.description} stars={rep.stargazers_count} issues={rep.open_issues} />
       })}
     </div>
   );

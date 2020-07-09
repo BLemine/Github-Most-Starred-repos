@@ -24,7 +24,7 @@ export default function Starred(props) {
       <ListItem>
         <ListItemAvatar>
           <Avatar>
-            <ImageIcon />
+          <img src={props.avatar} style={{width:"100%"}} alt='' />
           </Avatar>
         </ListItemAvatar>
         <ListItemText
@@ -65,6 +65,7 @@ export default function Starred(props) {
               >
                 : {props.issues}
               </span>
+              <span style={{width:"100%", position: "absolute",marginLeft:30, marginTop: 5 }}> Submitted 30 days ago by {props.repoName?props.repoName.split("/")[0]:"..."}</span>
             </span>
           }
         />
