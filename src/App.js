@@ -10,9 +10,13 @@ export default function App() {
   // this one below to be used to load more data/more pages
   const [page, setPage] = React.useState(1);
   const [loading,setLoading]=React.useState(true);
+  const getIn2digits=(param)=>{
+    if(param<10) return ("0"+param)
+  }
   const getRepos = () => {
     setLoading(true);
-    axios.get("https://api.github.com/search/repositories?q=created:%3E2020-06-09&sort=stars&order=desc&page="+page)
+    const timeInterval=new Date().getFullYear()+'-'+getIn2digits(new Date().getMonth())+'-'+getIn2digits(new Date().getDate());
+    axios.get("https://api.github.com/search/repositories?q=created:%3E"+timeInterval+"&sort=stars&order=desc&page="+page)
       .then(res => {
         setRepos(res.data);
         setPage(page + 1);
