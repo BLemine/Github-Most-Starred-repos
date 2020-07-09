@@ -1,15 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
-import WorkIcon from "@material-ui/icons/Work";
-import BeachAccessIcon from "@material-ui/icons/BeachAccess";
-import StarIcon from "@material-ui/icons/Star";
-import BugReportIcon from '@material-ui/icons/BugReport';
+import axios from "axios";
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -18,72 +9,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function FolderList() {
+export default function App() {
   const classes = useStyles();
-
+  const [repos,setRepos]=React.useState();
+  const [page,setPage]=React.useState(1);
+  const getRepos=()=>{
+    axios.get("https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc&page="+page)
+    .then(res=>{
+      setRepos(res.data);
+      setPage(page+1);
+      console.log(res.data.items[0])
+    }).catch(ex=>{
+      console.log(ex);
+    })
+  }
+  React.useEffect(()=>{
+    getRepos();
+  },[])
   return (
-    <List className={classes.root}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Work"
-          secondary={
-            <span>
-              <span
-                style={{
-                  width: 20,
-                  height: 20,
-                  display: "inline-block",
-                  marginRight: 10
-                }}
-              >
-                <StarIcon />
-              </span>
-              <span
-                style={{position:"absolute",marginTop:5 }}
-              >
-                : 1K
-              </span>
-              <span
-                style={{
-                  width: 20,
-                  height: 20,
-                  display: "inline-block",
-                  marginLeft:40,
-                  marginRight: 10
-                }}
-              >
-                <BugReportIcon />
-              </span>
-              <span
-                style={{position:"absolute",marginTop:5 }}
-              >
-                : 1K
-              </span>
-            </span>
-          }
-        />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <BeachAccessIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
-    </List>
+    <div>
+
+    </div>
   );
 }
