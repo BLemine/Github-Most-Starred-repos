@@ -1,26 +1,89 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import ImageIcon from "@material-ui/icons/Image";
+import WorkIcon from "@material-ui/icons/Work";
+import BeachAccessIcon from "@material-ui/icons/BeachAccess";
+import StarIcon from "@material-ui/icons/Star";
+import BugReportIcon from '@material-ui/icons/BugReport';
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
+  }
+}));
 
-function App() {
+export default function FolderList() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <List className={classes.root}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <ImageIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <WorkIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary="Work"
+          secondary={
+            <span>
+              <span
+                style={{
+                  width: 20,
+                  height: 20,
+                  display: "inline-block",
+                  marginRight: 10
+                }}
+              >
+                <StarIcon />
+              </span>
+              <span
+                style={{position:"absolute",marginTop:5 }}
+              >
+                : 1K
+              </span>
+              <span
+                style={{
+                  width: 20,
+                  height: 20,
+                  display: "inline-block",
+                  marginLeft:40,
+                  marginRight: 10
+                }}
+              >
+                <BugReportIcon />
+              </span>
+              <span
+                style={{position:"absolute",marginTop:5 }}
+              >
+                : 1K
+              </span>
+            </span>
+          }
+        />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <BeachAccessIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Vacation" secondary="July 20, 2014" />
+      </ListItem>
+    </List>
   );
 }
-
-export default App;
