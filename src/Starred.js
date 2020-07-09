@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Starred() {
+export default function Starred(props) {
   const classes = useStyles();
 
   return (
@@ -31,6 +31,9 @@ export default function Starred() {
           primary={props.repoName}
           secondary={
             <span>
+              <span style={{ display: "block" }}>
+                {props.description}
+              </span>
               <span
                 style={{
                   width: 20,
